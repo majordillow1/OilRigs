@@ -1,0 +1,22 @@
+#Hello and welcome to Oilrigs! This section will deal with How the oilrigs act
+#The way that oilrigs math works is as follows Burntime = (fuelBurnOperator/pipelength -1)-20)
+#and FuelUseAmount = fuelOperator * ((1/200)*pipelength^2+4) only change this if youre a mathmatician
+fuelBurnOperator: 2000
+fuelOperator: 2
+#This section deals with the Bomb arrow
+#changing canCraft requires restart to take place
+canCraftBombArrow: true
+bombArrowSize: 4
+BombArrowCanBeDispensed: true
+#This section deals with the Molotovs
+#changing canCraft requires restart to take place
+canCraftMolotov: true
+MolotovSize: 4
+MolotovCanBeDispensed: true
+#This section deals with Landmines
+canCraftLandmine: true
+LandMineRange: 0.5
+LandMineExplosionSize: 4
+#This deals with the Refinery
+#This speed is in ticks
+RefineFuelBurnSpeed: 80

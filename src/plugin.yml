@@ -1,0 +1,20 @@
+name: OilRigs
+main: oilrigs.OilRigs
+version: 1.0
+author: oceanichelicopter
+depend: [Multiverse-Core]
+commands:
+    oilReload:
+        description: Realods the Config for Oilrigs
+        usage: /oilreload
+    getmolotov:
+        description: Gives player molotov;
+        usage: /getmolotov
+    getbombarrow:
+        description: Gives player a bomb arrow
+        usage: /getbombarrow
+        
+permissions:
+    oilrigs.Commands:
+        description: perms to do oilrigs commands
+        default: op

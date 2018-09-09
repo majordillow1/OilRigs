@@ -154,7 +154,7 @@ public class OilRigs extends JavaPlugin {
         ShapelessRecipe Molotovrev = new ShapelessRecipe(k, taser);
         Molotovrev.addIngredient(Material.LEVER);
         Molotovrev.addIngredient(Material.REDSTONE);
-        Molotovrev.addIngredient(Material.NETHER_BRICK_ITEM);
+        Molotovrev.addIngredient(Material.NETHER_BRICK);
 
         return Molotovrev;
     }
@@ -169,24 +169,24 @@ public class OilRigs extends JavaPlugin {
         taser.setItemMeta(meta);
         ShapelessRecipe Molotovrev = new ShapelessRecipe(k, taser);
         Molotovrev.addIngredient(Material.LEVER);
-        Molotovrev.addIngredient(Material.NETHER_BRICK_ITEM);
+        Molotovrev.addIngredient(Material.NETHER_BRICK);
 
         return Molotovrev;
     }
 
     public static ShapedRecipe Landmine(NamespacedKey k) {
-        ItemStack landmine = new ItemStack(Material.LONG_GRASS);
+        ItemStack landmine = new ItemStack(Material.GRASS);
         landmine.setDurability((short) 1);
         ItemMeta im = landmine.getItemMeta();
         im.setDisplayName(org.bukkit.ChatColor.BLUE + "Landmine");
         landmine.setItemMeta(im);
         ShapedRecipe Landmine = new ShapedRecipe(k, landmine);
         Landmine.shape("   ", "LM ", "COR");
-        Landmine.setIngredient('C', Material.REDSTONE_COMPARATOR);
+        Landmine.setIngredient('C', Material.COMPARATOR);
         Landmine.setIngredient('R', Material.REDSTONE);
         Landmine.setIngredient('O', Material.POTION);
         Landmine.setIngredient('L', Material.LEVER);
-        Landmine.setIngredient('M', new MaterialData(Material.LONG_GRASS, (byte) 1));
+        Landmine.setIngredient('M', new MaterialData(Material.GRASS, (byte) 1));
         return Landmine;
 
     }
@@ -200,7 +200,7 @@ public class OilRigs extends JavaPlugin {
         ShapedRecipe genrep = new ShapedRecipe(k, generator);
         genrep.shape("RS ", "CJO", "GSL");
         genrep.setIngredient('S', Material.SHULKER_SHELL);
-        genrep.setIngredient('C', Material.REDSTONE_COMPARATOR);
+        genrep.setIngredient('C', Material.COMPARATOR);
         genrep.setIngredient('J', Material.CHEST);
         genrep.setIngredient('O', Material.POTION);
         genrep.setIngredient('G', Material.POTION);
@@ -211,7 +211,7 @@ public class OilRigs extends JavaPlugin {
     }
 
     public static ShapedRecipe dedBattery(NamespacedKey k) {
-        ItemStack battery = new ItemStack(Material.NETHER_BRICK_ITEM);
+        ItemStack battery = new ItemStack(Material.NETHER_BRICK);
         ItemMeta batt = battery.getItemMeta();
         List<String> deadbatt = new ArrayList<String>();
         deadbatt.add(org.bukkit.ChatColor.BLUE + "Dead Battery");
@@ -220,10 +220,10 @@ public class OilRigs extends JavaPlugin {
         battery.setItemMeta(batt);
         ShapedRecipe genrep = new ShapedRecipe(k, battery);
         genrep.shape("L L", "SSS", "ORO");
-        genrep.setIngredient('S', Material.NETHER_BRICK_ITEM);
+        genrep.setIngredient('S', Material.NETHER_BRICK);
         genrep.setIngredient('L', Material.LEVER);
         genrep.setIngredient('O', Material.POTION);
-        genrep.setIngredient('R', Material.DIODE);
+        genrep.setIngredient('R', Material.REPEATER);
         return genrep;
 
     }
@@ -328,7 +328,7 @@ public class OilRigs extends JavaPlugin {
                 if (LandMineLocs.get(i).getBlock().getType() == null) {
                     LandMineLocs.remove(i);
                 }
-                if (!LandMineLocs.get(i).getBlock().getType().equals(Material.LONG_GRASS)) {
+                if (!LandMineLocs.get(i).getBlock().getType().equals(Material.GRASS)) {
                     LandMineLocs.remove(i);
                 }
             }

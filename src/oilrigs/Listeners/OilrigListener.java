@@ -227,7 +227,7 @@ public class OilrigListener implements Listener {
         irons.add(Iron4);
         int ironsnum = 0;
         for (int i = 0; i < irons.size(); i++) {
-            if (irons.get(i).getType().equals(Material.IRON_FENCE)) {
+            if (irons.get(i).getType().equals(Material.IRON_BARS)) {
                 ironsnum += 1;
             }
         }
@@ -247,7 +247,7 @@ public class OilrigListener implements Listener {
         Block lastBlock = iter.next();
         while (iter.hasNext()) {
             lastBlock = iter.next();
-            if (lastBlock.getType() == Material.COBBLE_WALL) {
+            if (lastBlock.getType() == Material.COBBLESTONE_WALL) {
                 Block lastXup = lastBlock.getLocation().add(1, 0, 0).getBlock();
                 Block lastXDown = lastBlock.getLocation().add(-1, 0, 0).getBlock();
                 Block lastZup = lastBlock.getLocation().add(0, 0, 1).getBlock();

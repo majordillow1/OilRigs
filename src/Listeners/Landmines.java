@@ -35,7 +35,7 @@ public class Landmines implements Listener {
     }
 
     public ItemStack Landmineitem() {
-        ItemStack landmine = new ItemStack(Material.LONG_GRASS);
+        ItemStack landmine = new ItemStack(Material.GRASS);
         ItemMeta im = landmine.getItemMeta();
         im.setDisplayName(ChatColor.BLUE + "Landmine");
         landmine.setItemMeta(im);
@@ -44,7 +44,7 @@ public class Landmines implements Listener {
 
     @EventHandler
     public void CheckOil(PrepareItemCraftEvent e) {
-        ItemStack landmine = new ItemStack(Material.LONG_GRASS);
+        ItemStack landmine = new ItemStack(Material.GRASS);
         ItemMeta im = landmine.getItemMeta();
         im.setDisplayName(ChatColor.BLUE + "Landmine");
         landmine.setItemMeta(im);
@@ -122,7 +122,7 @@ public class Landmines implements Listener {
                             oilrigs.OilRigs.LandMineLocs.remove(i);
                             return;
                         }
-                        if (oilrigs.OilRigs.LandMineLocs.get(i).getBlock().getType().equals(Material.LONG_GRASS)) {
+                        if (oilrigs.OilRigs.LandMineLocs.get(i).getBlock().getType().equals(Material.GRASS)) {
                             e.getTo().getWorld().createExplosion(e.getTo(), plugin.getConfig().getInt("LandMineExplosionSize"));
                             oilrigs.OilRigs.LandMineLocs.remove(i);
                         } else {
@@ -139,7 +139,7 @@ public class Landmines implements Listener {
 
     public void breakLandmine(Location loc) {
         oilrigs.OilRigs.LandMineLocs.remove(loc);
-        ItemStack landmine = new ItemStack(Material.LONG_GRASS);
+        ItemStack landmine = new ItemStack(Material.GRASS);
         landmine.setDurability((short) 1);
         ItemMeta im = landmine.getItemMeta();
         im.setDisplayName(ChatColor.BLUE + "Landmine");

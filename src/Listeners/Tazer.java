@@ -63,7 +63,7 @@ public class Tazer implements Listener {
                         continue;
                     }
                     ItemStack it = e.getInventory().getMatrix()[i];
-                    if (it.getType().equals(Material.NETHER_BRICK_ITEM)) {
+                    if (it.getType().equals(Material.NETHER_BRICK)) {
                         if (it.hasItemMeta()) {
                             if (it.getItemMeta().hasDisplayName()) {
                                 if (it.getItemMeta().hasLore()) {
@@ -145,7 +145,7 @@ public class Tazer implements Listener {
                             break;
                         }
                     }
-                    if (e.getInventory().getMatrix()[i].getType().equals(Material.NETHER_BRICK_ITEM)) {
+                    if (e.getInventory().getMatrix()[i].getType().equals(Material.NETHER_BRICK)) {
                         //deal with battery
                         if (!item.hasItemMeta()) {
                             canMake = false;

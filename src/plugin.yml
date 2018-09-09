@@ -1,8 +1,8 @@
 name: OilRigs
 main: oilrigs.OilRigs
 version: 1.0
+api-version: 1.13
 author: oceanichelicopter
-depend: [Multiverse-Core]
 commands:
     oilReload:
         description: Realods the Config for Oilrigs

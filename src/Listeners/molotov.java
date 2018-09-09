@@ -186,7 +186,7 @@ public class molotov implements Listener {
             if (b.getType().equals(Material.AIR) && !under.getType().equals(Material.AIR) && !under.isLiquid() && !under.getType().equals(Material.FIRE)) {
                 b.setType(Material.FIRE);
             }
-            if (under.getType().equals(Material.LONG_GRASS)) {
+            if (under.getType().equals(Material.GRASS)) {
                 under.setType(Material.FIRE);
             }
 

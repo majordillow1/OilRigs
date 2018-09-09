@@ -284,14 +284,14 @@ public class GeneratorListener implements Listener {
                 im.setLore(ls);
                 im.setColor(Color.GREEN);
                 gas.setItemMeta(im);
-                ItemStack battery = new ItemStack(Material.NETHER_BRICK_ITEM);
+                ItemStack battery = new ItemStack(Material.NETHER_BRICK);
                 ItemMeta batt = battery.getItemMeta();
                 List<String> deadbatt = new ArrayList<String>();
                 deadbatt.add(ChatColor.BLUE + "Dead Battery");
                 batt.setDisplayName("Battery");
                 batt.setLore(deadbatt);
                 battery.setItemMeta(batt);
-                ItemStack batteryfull = new ItemStack(Material.NETHER_BRICK_ITEM);
+                ItemStack batteryfull = new ItemStack(Material.NETHER_BRICK);
                 ItemMeta batts = batteryfull.getItemMeta();
                 List<String> fullbatt = new ArrayList<String>();
                 fullbatt.add(ChatColor.BLUE + "Full Battery");
@@ -325,7 +325,7 @@ public class GeneratorListener implements Listener {
                                     }
                                 }
                             }
-                            if (gen.getInventory().getItem(i).getType().equals(Material.NETHER_BRICK_ITEM)) {
+                            if (gen.getInventory().getItem(i).getType().equals(Material.NETHER_BRICK)) {
                                 //check lore
                                 if (gen.getInventory().getItem(i).getItemMeta().hasLore()) {
                                     if (gen.getInventory().getItem(i).getItemMeta().getLore().contains(ChatColor.BLUE + "Dead Battery")) {

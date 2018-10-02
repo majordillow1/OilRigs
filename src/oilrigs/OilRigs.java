@@ -5,11 +5,13 @@
  */
 package oilrigs;
 
-import Commands.GetMolotov;
-import Commands.ReloadConfigCommand;
-import Commands.getBombArrow;
+
+import Commands.OilrigsCommandHandler;
+
+
 import Listeners.BombArrow;
 import Listeners.Landmines;
+import Listeners.MachineGunBow;
 import Listeners.Tazer;
 import Listeners.deadBattery;
 import Listeners.molotov;
@@ -26,11 +28,12 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.md_5.bungee.api.ChatColor;
+
 import oilrigs.Listeners.GeneratorListener;
 
 import oilrigs.Listeners.OilrigListener;
 import oilrigs.Listeners.Refinery;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -47,7 +50,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
-import org.bukkit.scheduler.BukkitScheduler;
 
 /**
  *
@@ -61,9 +63,10 @@ public class OilRigs extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        this.getCommand("oilReload").setExecutor(new ReloadConfigCommand(this));
-        this.getCommand("getmolotov").setExecutor(new GetMolotov(this));
-        this.getCommand("getbombarrow").setExecutor(new getBombArrow(this));
+        this.getCommand("or").setExecutor(new OilrigsCommandHandler(this));
+     
+        
+        this.getServer().getPluginManager().registerEvents(new MachineGunBow(this), this);
         this.getServer().getPluginManager().registerEvents(new OilrigListener(this), this);
         this.getServer().getPluginManager().registerEvents(new Refinery(this), this);
         this.getServer().getPluginManager().registerEvents(new BombArrow(this), this);
@@ -227,6 +230,25 @@ public class OilRigs extends JavaPlugin {
         return genrep;
 
     }
+    
+    public static ShapedRecipe MachineGunBow(NamespacedKey k) {
+        ItemStack MGB = new ItemStack(Material.BOW);
+        ItemMeta MGBMETA = MGB.getItemMeta();
+        List<String> MGBLORE = new ArrayList<String>();
+        MGBLORE.add(org.bukkit.ChatColor.BLUE + "Machine gun Bow");
+        MGBMETA.setDisplayName("Mcahnine gun bow");
+        MGBMETA.setLore(MGBLORE);
+        MGB.setItemMeta(MGBMETA);
+        ShapedRecipe genrep = new ShapedRecipe(k, MGB);
+        genrep.shape(" N ", " BO", " R ");
+        genrep.setIngredient('B', Material.BOW);
+        
+        genrep.setIngredient('O', Material.POTION);
+        genrep.setIngredient('N', Material.NETHER_BRICK);
+        genrep.setIngredient('R', Material.REPEATER);
+        return genrep;
+
+    }
 
     public void setupRecipie() {
         if (this.getConfig().getBoolean("canCraftBombArrow")) {
@@ -250,6 +272,13 @@ public class OilRigs extends JavaPlugin {
         NamespacedKey key7 = new NamespacedKey(this, this.getDescription().getName() + "seeven");
         getServer().addRecipe(TaserRecharge(key7));
 
+        if (this.getConfig().getBoolean("canCraftMachineGunBow")) {
+            NamespacedKey key8 = new NamespacedKey(this, this.getDescription().getName() + "eight");
+            getServer().addRecipe(MachineGunBow(key8));
+        }
+        
+        
+        
         List<String> ls = new ArrayList<String>();
         ls.add(ChatColor.BLUE + "Used for powering Generators");
         ItemStack gas = new ItemStack(Material.POTION);

@@ -14,27 +14,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
-import java.io.Console;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import oilrigs.OilRigs;
 import org.bukkit.Color;
 import org.bukkit.block.Chest;
-import org.bukkit.block.Furnace;
 import org.bukkit.block.Sign;
-import org.bukkit.entity.Item;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.Potion;
 
 /**
  *

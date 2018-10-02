@@ -4,15 +4,13 @@ version: 1.0
 api-version: 1.13
 author: oceanichelicopter
 commands:
+    or:
+        description: Base oilrigs command. Use get to get an item or reload to reload the config
+        usage: /or
     oilReload:
         description: Realods the Config for Oilrigs
         usage: /oilreload
-    getmolotov:
-        description: Gives player molotov;
-        usage: /getmolotov
-    getbombarrow:
-        description: Gives player a bomb arrow
-        usage: /getbombarrow
+
         
 permissions:
     oilrigs.Commands:

@@ -5,8 +5,9 @@
  */
 package Listeners;
 
-import net.md_5.bungee.api.ChatColor;
+
 import oilrigs.OilRigs;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,7 +16,6 @@ import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
-import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockDispenseEvent;
@@ -31,7 +31,6 @@ import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-import sun.security.ssl.Debug;
 
 /**
  *

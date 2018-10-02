@@ -6,13 +6,9 @@
 package oilrigs.Listeners;
 
 import java.util.ArrayList;
-import java.util.Random;
-import net.md_5.bungee.api.ChatColor;
 import oilrigs.OilRigs;
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Furnace;
@@ -22,12 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.FurnaceInventory;
-import org.bukkit.scheduler.BukkitRunnable;
-import sun.security.util.Debug;
 
 /**
  *

@@ -2,8 +2,9 @@ package Listeners;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.md_5.bungee.api.ChatColor;
+
 import oilrigs.OilRigs;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.LlamaSpit;
@@ -24,7 +25,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import sun.security.util.Debug;
+
 
 /**
  *
@@ -55,7 +56,7 @@ public class Tazer implements Listener {
             ShapelessRecipe s = (ShapelessRecipe) e.getRecipe();
             NamespacedKey key6 = new NamespacedKey(plugin, plugin.getDescription().getName() + "seven");
             if (s.getKey().equals(key6)) {
-                Debug.println("taser", "yee");
+                
                 boolean canCraft = true;
                 boolean FullBatt = true;
                 for (int i = 0; i < e.getInventory().getSize() - 1; i++) {
@@ -233,7 +234,8 @@ public class Tazer implements Listener {
             }
             if (e.getHitEntity() instanceof Player) {
                 Player p = (Player) e.getHitEntity();
-                PotionEffect pe = new PotionEffect(PotionEffectType.CONFUSION, 80, 2);
+                PotionEffect pe = new PotionEffect(PotionEffectType.CONFUSION, plugin.getConfig().getInt("TazerTime"), 2);
+                p.sendMessage(ChatColor.RED + "You got Tazed!");
                 p.addPotionEffect(pe);
                 freezes.add(p);
                 BukkitTask task = new BukkitRunnable() {
@@ -242,7 +244,7 @@ public class Tazer implements Listener {
                         freezes.remove(p);
                     }
 
-                }.runTaskLater(plugin, 80);
+                }.runTaskLater(plugin, plugin.getConfig().getInt("TazerTime"));
             }
         }
     }

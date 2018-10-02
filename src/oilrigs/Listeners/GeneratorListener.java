@@ -10,28 +10,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import oilrigs.OilRigs;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
-import sun.security.ssl.Debug;
 
 /**
  *
@@ -138,6 +133,7 @@ public class GeneratorListener implements Listener {
 
     @EventHandler
     public void CanttakeLEver(InventoryClickEvent e) {
+        
         if (e.getClickedInventory() == null) {
             return;
         }

@@ -20,12 +20,15 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import oilrigs.OilRigs;
 import org.bukkit.Color;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  *
@@ -113,6 +116,8 @@ public class OilrigListener implements Listener {
     public HashMap oilamthash = new HashMap();
 
     public void giveOil(Location loc, float i) {
+        
+        
         float start = 0;
         Block Chess = loc.getBlock().getLocation().add(0, 2, 0).getBlock();
         ItemStack oil = new ItemStack(Material.POTION);
@@ -193,6 +198,8 @@ public class OilrigListener implements Listener {
                     Inventory inv = chest.getInventory();
                     if (inv.getContents().length <= 27) {
                         inv.addItem(oil);
+                        loc.getWorld().playSound(loc, Sound.ENTITY_LLAMA_EAT, 3F, 1F);
+                        
                     }
 
                 }

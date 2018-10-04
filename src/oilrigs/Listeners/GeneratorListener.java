@@ -14,6 +14,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,6 +28,7 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  *
@@ -184,75 +186,14 @@ public class GeneratorListener implements Listener {
         }
 
     }
-
+   
     public void startTask(Location loc, boolean b) {
 
-        /*BukkitTask taskId = plugin.getServer().getScheduler().runTaskTimer(plugin, new Runnable()
-               {
-                   public void run()
-                   {
-                       if(!gens.get(loc)){
-                           Debug.println("WHY 1", "WHYYY");
-                           
-                           return;
-                           
-                           
-                       }
-                       if(loc.getBlock() == null){
-                           gens.remove(loc);
-                           oilrigs.OilRigs.GeneratorLocs.remove(loc);
-                           Debug.println("WHY 2", "WHYYY");
-                       }
-                       if(!loc.getBlock().getType().equals(Material.BLACK_SHULKER_BOX)){
-                           Debug.println("WHY 3", "WHYYY");
-                           gens.remove(loc);
-                           oilrigs.OilRigs.GeneratorLocs.remove(loc);
-                           
-                       }
-                       ShulkerBox gen = (ShulkerBox) loc.getBlock().getState();
-                       List<String> ls = new ArrayList<String>();
-                       ls.add(ChatColor.BLUE + "Used for powering Generators");
-                       ItemStack gas = new ItemStack(Material.POTION);
-                       PotionMeta im = (PotionMeta) gas.getItemMeta();
-                       im.setDisplayName(net.md_5.bungee.api.ChatColor.GREEN + "Gas");
-                       im.setLore(ls);
-                       im.setColor(Color.GREEN);
-                       gas.setItemMeta(im);
-                       ItemStack battery = new ItemStack(Material.NETHER_BRICK_ITEM);
-                       ItemMeta batt = battery.getItemMeta();
-                       List<String> deadbatt = new ArrayList<String>();
-                       deadbatt.add(ChatColor.BLUE + "Dead Battery");
-                       batt.setDisplayName("Battery");
-                       batt.setLore(deadbatt);
-                       battery.setItemMeta(batt);
-                       ItemStack batteryfull = new ItemStack(Material.NETHER_BRICK_ITEM);
-                       ItemMeta batts = batteryfull.getItemMeta();
-                       List<String> fullbatt = new ArrayList<String>();
-                       deadbatt.add(ChatColor.BLUE + "Full Battery");
-                       batts.setDisplayName("Battery");
-                       batts.setLore(deadbatt);
-                       batteryfull.setItemMeta(batts);
-                       if(!gen.getInventory().contains(gas)||!gen.getInventory().contains(battery)){
-                           startGenerator(loc);
-                           Debug.println("WHY 4", "WHYYY");
-                       }
-                       
-                       if(gen.getInventory().contains(gas)&&gen.getInventory().contains(battery)){
-                           gen.getInventory().remove(gas);
-                           gen.getInventory().remove(battery);
-                           gen.getInventory().addItem(batteryfull);
-                       }
-                       
-                   }
-               }, 160L, 180L);
-       if(!b){
-        taskId.cancel();
-       }
-   }
-         */
+        
         RepeatingTask repeatingTask = new RepeatingTask(plugin, 20, 20) {
             @Override
             public void run() {
+                
                 if (!gens.get(loc)) {
                     //Debug.println("WHY 1", "WHYYY");
                     canncel();
@@ -346,12 +287,15 @@ public class GeneratorListener implements Listener {
                     }
                 }
                 if (!hasFuel) {
-                    startGenerator(loc);
+                    //startGenerator(loc);
                     //Debug.println("WHY 4", "WHYYY");
                     canncel();
                 }
 
                 if (hasFuel) {
+                    
+                                  //particles(loc);
+                    
                     if (hasdedbatt) {
                         gen.getInventory().clear(fuelp);
                         if (gen.getInventory().getItem(dedbattp).getAmount() >= 2) {
@@ -378,8 +322,18 @@ public class GeneratorListener implements Listener {
                 }
 
             }
+
+         
+            
+
+            
         };
+        
+         
 
     }
+
+   
+   
 
 }

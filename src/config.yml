@@ -22,6 +22,7 @@ LandMineExplosionSize: 4
 RefineFuelBurnSpeed: 80
 #this deals with the Machine gun Bow
 canCraftMachineGunBow: true
-
+#in ticks
+BowSpeed: 5
 #Tazer time that a person is tased in ticks
 TazerTime: 80

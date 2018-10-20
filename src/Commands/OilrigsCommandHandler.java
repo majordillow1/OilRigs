@@ -100,6 +100,12 @@ this.plugin = plugin;
                         case "gas":
                             giveGas(p);
                             break;
+                        case "machinegunbow":
+                            giveMachineGunBow(p);
+                            break;
+                        case "oilrig":
+                            giveOilRig(p);
+                            break;
                         default:
                             p.sendMessage("did you spell that right?");
                             break;
@@ -223,6 +229,34 @@ this.plugin = plugin;
         gas.setItemMeta(im);
         p.getInventory().addItem(gas);
         p.updateInventory();
+    }
+
+    private void giveMachineGunBow(Player p) {
+        ItemStack MGB = new ItemStack(Material.BOW);
+        ItemMeta MGBMETA = MGB.getItemMeta();
+        List<String> MGBLORE = new ArrayList<String>();
+        MGBLORE.add("100%");
+        MGBMETA.setDisplayName(ChatColor.BLUE + "Machine gun bow");
+        MGBMETA.setLore(MGBLORE);
+        MGB.setItemMeta(MGBMETA);
+        p.getInventory().addItem(MGB);
+        p.updateInventory();
+    }
+
+    private void giveOilRig(Player p) {
+       ItemStack cobblestoneWall = new ItemStack(Material.COBBLESTONE_WALL,64);
+       ItemStack chest = new ItemStack(Material.CHEST,1);
+       ItemStack hopper = new ItemStack(Material.HOPPER,1);
+       ItemStack furnace = new ItemStack(Material.FURNACE,1);
+       ItemStack ironBars = new ItemStack(Material.IRON_BARS,3);
+       ItemStack sign = new ItemStack(Material.SIGN,1);
+       p.getInventory().addItem(cobblestoneWall);
+       p.getInventory().addItem(chest);
+       p.getInventory().addItem(hopper);
+       p.getInventory().addItem(furnace);
+       p.getInventory().addItem(ironBars);
+       p.getInventory().addItem(sign);
+       p.updateInventory();
     }
 
 }

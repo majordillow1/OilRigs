@@ -199,7 +199,23 @@ public class OilrigListener implements Listener {
                     if (inv.getContents().length <= 27) {
                         inv.addItem(oil);
                         loc.getWorld().playSound(loc, Sound.ENTITY_LLAMA_EAT, 3F, 1F);
-                        
+                        new BukkitRunnable(){
+                            Location ploc = loc.subtract(0,1,0);
+                            double t = 0;
+                            double r = 1.5;
+                            public void run(){
+                                t = t + Math.PI/16;
+                                double x = r * Math.cos(t);
+                                double y = 0.5 * t;
+                                double z = r*Math.sin(t);
+                                ploc.add(x,y,z);
+                                ploc.getWorld().spawnParticle(Particle.FLAME, ploc, 0,0,0,0,1);
+                                ploc.subtract(x,y,z);
+                                if(t > Math.PI*4){
+                                    this.cancel();
+                                }
+                            }
+                        }.runTaskTimer(plugin, 0, 1);
                     }
 
                 }

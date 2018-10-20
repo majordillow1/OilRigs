@@ -1,6 +1,6 @@
 name: OilRigs
 main: oilrigs.OilRigs
-version: 1.0
+version: 1.4.1
 api-version: 1.13
 author: oceanichelicopter
 commands:

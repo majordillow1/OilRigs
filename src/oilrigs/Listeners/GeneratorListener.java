@@ -5,10 +5,15 @@
  */
 package oilrigs.Listeners;
 
+import Listeners.MachineGunBow;
 import Util.RepeatingTask;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import oilrigs.OilRigs;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -29,6 +34,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import sun.security.util.Debug;
 
 /**
  *
@@ -217,7 +223,7 @@ public class GeneratorListener implements Listener {
                 ls.add(ChatColor.BLUE + "Used for powering Generators");
                 ItemStack gas = new ItemStack(Material.POTION);
                 PotionMeta im = (PotionMeta) gas.getItemMeta();
-                im.setDisplayName(net.md_5.bungee.api.ChatColor.GREEN + "Gas");
+                im.setDisplayName(ChatColor.GREEN + "Gas");
                 im.setLore(ls);
                 im.setColor(Color.GREEN);
                 gas.setItemMeta(im);
@@ -246,7 +252,9 @@ public class GeneratorListener implements Listener {
                 boolean hasFuel = false;
                 boolean hasdedbatt = false;
                 boolean hasdedTaser = false;
+                boolean hasdedbow = false;
                 int dedtaserp = 0;
+                int dedbowp = 0;
                 int fuelp = 0;
                 int dedbattp = 0;
                 int dedbattamt = 0;
@@ -256,7 +264,7 @@ public class GeneratorListener implements Listener {
                             if (gen.getInventory().getItem(i).getType().equals(Material.POTION)) {
                                 //check name
                                 if (gen.getInventory().getItem(i).getItemMeta().hasDisplayName()) {
-                                    if (gen.getInventory().getItem(i).getItemMeta().getDisplayName().equals(net.md_5.bungee.api.ChatColor.GREEN + "Gas")) {
+                                    if (gen.getInventory().getItem(i).getItemMeta().getDisplayName().equals(ChatColor.GREEN + "Gas")) {
                                         hasFuel = true;
                                         fuelp = i;
                                     }
@@ -279,6 +287,36 @@ public class GeneratorListener implements Listener {
                                             hasdedTaser = true;
                                             dedtaserp = i;
 
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if (gen.getInventory().getItem(i).getType().equals(Material.BOW)) {
+                                //check lore
+                                if (gen.getInventory().getItem(i).getItemMeta().hasLore()) {
+                                    if (gen.getInventory().getItem(i).getItemMeta().getDisplayName().contains(ChatColor.BLUE + "Machine gun bow")) {
+                                        if(gen.getInventory().getItem(i).getItemMeta().hasLore()){
+                                            
+                                        String percent = gen.getInventory().getItem(i).getItemMeta().getLore().get(0);
+                        NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+                    try {
+                       Number value = defaultFormat.parse(ChatColor.translateAlternateColorCodes('&', percent));
+                        Double f1 = value.doubleValue();
+                        Double f2 = f1 * 100;
+                        int f = f2.intValue();
+                        if(f < 100){
+                          //  Debug.println("charge me", "fiddy percent");
+                            hasdedbow = true;
+                            dedbowp = i;
+                        }
+                        
+                            
+                        
+                         } catch (ParseException ex) {
+                        Logger.getLogger(MachineGunBow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                                        
                                         }
                                     }
                                 }
@@ -315,6 +353,44 @@ public class GeneratorListener implements Listener {
                             gen.getInventory().clear(dedtaserp);
                         }
                         gen.getInventory().addItem(taser);
+                        return;
+                    }
+                    if (hasdedbow) {
+                        gen.getInventory().clear(fuelp);
+                        ItemStack bow = gen.getInventory().getItem(dedbowp);
+                        ItemMeta bowmeta = bow.getItemMeta();
+                        String percent = bowmeta.getLore().get(0);
+                        NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+                    try {
+                       Number value = defaultFormat.parse(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', percent)));
+                        Double f1 = value.doubleValue();
+                        Double f2 = f1 * 100;
+                        int f = f2.intValue();
+                       // Debug.println("f is", "this " + f);
+                          //  Debug.println("charge me", "fiddy percent the second");
+                            f += 25;
+                            if(f >= 100){
+                                f = 100;
+                                 List<String> NewLore = new ArrayList<String>();
+                            NewLore.add(f+"%");
+                            bowmeta.setLore(NewLore);
+                            bow.setItemMeta(bowmeta);
+                            //gen.update();
+                            }else{
+                                List<String> NewLore = new ArrayList<String>();
+                            NewLore.add(f+"%");
+                            bowmeta.setLore(NewLore);
+                            bow.setItemMeta(bowmeta);
+                            //gen.update();
+                            }
+                        
+                        
+                            
+                        
+                         } catch (ParseException ex) {
+                        Logger.getLogger(MachineGunBow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        //gen.getInventory().addItem(taser);
                         return;
                     }
                     gen.getInventory().clear(fuelp);

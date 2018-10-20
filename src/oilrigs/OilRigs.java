@@ -176,6 +176,21 @@ public class OilRigs extends JavaPlugin {
 
         return Molotovrev;
     }
+    
+    public static ShapelessRecipe BowRecharge(NamespacedKey k) {
+         ItemStack MGB = new ItemStack(Material.BOW);
+        ItemMeta MGBMETA = MGB.getItemMeta();
+        List<String> MGBLORE = new ArrayList<String>();
+        MGBLORE.add("100%");
+        MGBMETA.setDisplayName(ChatColor.BLUE + "Machine gun bow");
+        MGBMETA.setLore(MGBLORE);
+        MGB.setItemMeta(MGBMETA);
+        ShapelessRecipe Molotovrev = new ShapelessRecipe(k, MGB);
+        Molotovrev.addIngredient(Material.BOW);
+        Molotovrev.addIngredient(Material.NETHER_BRICK);
+
+        return Molotovrev;
+    }
 
     public static ShapedRecipe Landmine(NamespacedKey k) {
         ItemStack landmine = new ItemStack(Material.GRASS);
@@ -235,8 +250,8 @@ public class OilRigs extends JavaPlugin {
         ItemStack MGB = new ItemStack(Material.BOW);
         ItemMeta MGBMETA = MGB.getItemMeta();
         List<String> MGBLORE = new ArrayList<String>();
-        MGBLORE.add(org.bukkit.ChatColor.BLUE + "Machine gun Bow");
-        MGBMETA.setDisplayName("Mcahnine gun bow");
+        MGBLORE.add("100%");
+        MGBMETA.setDisplayName(ChatColor.BLUE + "Machine gun bow");
         MGBMETA.setLore(MGBLORE);
         MGB.setItemMeta(MGBMETA);
         ShapedRecipe genrep = new ShapedRecipe(k, MGB);
@@ -276,7 +291,8 @@ public class OilRigs extends JavaPlugin {
             NamespacedKey key8 = new NamespacedKey(this, this.getDescription().getName() + "eight");
             getServer().addRecipe(MachineGunBow(key8));
         }
-        
+        NamespacedKey key9 = new NamespacedKey(this, this.getDescription().getName() + "NYNE");
+            getServer().addRecipe(BowRecharge(key9));
         
         
         List<String> ls = new ArrayList<String>();

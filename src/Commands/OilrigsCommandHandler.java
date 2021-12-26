@@ -249,7 +249,7 @@ this.plugin = plugin;
        ItemStack hopper = new ItemStack(Material.HOPPER,1);
        ItemStack furnace = new ItemStack(Material.FURNACE,1);
        ItemStack ironBars = new ItemStack(Material.IRON_BARS,3);
-       ItemStack sign = new ItemStack(Material.SIGN,1);
+       ItemStack sign = new ItemStack(Material.DARK_OAK_SIGN,1);
        p.getInventory().addItem(cobblestoneWall);
        p.getInventory().addItem(chest);
        p.getInventory().addItem(hopper);

@@ -19,11 +19,15 @@ import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import oilrigs.OilRigs;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
+import org.bukkit.block.Furnace;
 import org.bukkit.block.Sign;
+import org.bukkit.block.data.Directional;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -119,7 +123,12 @@ public class OilrigListener implements Listener {
         
         
         float start = 0;
-        Block Chess = loc.getBlock().getLocation().add(0, 2, 0).getBlock();
+        //Block Chess = loc.getBlock().getLocation().add(0, 2, 0).getBlock();
+        Furnace f = (Furnace) loc.getBlock().getState();
+        Directional Furnaced = (Directional) f.getBlockData();
+        BlockFace targetFace = Furnaced.getFacing();
+        Location front = f.getBlock().getRelative(targetFace).getLocation();
+        Block Chess = front.add(0,-1,0).getBlock();
         ItemStack oil = new ItemStack(Material.POTION);
 
         PotionMeta pMeta = (PotionMeta) oil.getItemMeta();
@@ -144,16 +153,16 @@ public class OilrigListener implements Listener {
             Block Sign3 = loc.getBlock().getLocation().add(1, 1, 0).getBlock();
             Block Sign4 = loc.getBlock().getLocation().add(-1, 1, 0).getBlock();
             int s = 0;
-            if (Sign.getType().equals(Material.WALL_SIGN)) {
+            if (Sign.getState() instanceof Sign) {
                 s = 1;
             }
-            if (Sign2.getType().equals(Material.WALL_SIGN)) {
+            if (Sign2.getState() instanceof Sign) {
                 s = 2;
             }
-            if (Sign3.getType().equals(Material.WALL_SIGN)) {
+            if (Sign3.getState() instanceof Sign) {
                 s = 3;
             }
-            if (Sign4.getType().equals(Material.WALL_SIGN)) {
+            if (Sign4.getState() instanceof Sign) {
                 s = 4;
             }
             double check = Math.round((float) oilamthash.get(loc) / equation * 100f);
@@ -194,6 +203,7 @@ public class OilrigListener implements Listener {
 
                 oilamthash.replace(loc, start);
                 if (Chess.getType().equals(Material.CHEST)) {
+                    //Bukkit.broadcastMessage("I may deposit");
                     Chest chest = (Chest) Chess.getState();
                     Inventory inv = chest.getInventory();
                     if (inv.getContents().length <= 27) {
@@ -226,26 +236,32 @@ public class OilrigListener implements Listener {
     }
 
     public boolean isOilRig(Block b) {
-        ArrayList<Block> irons = new ArrayList<Block>();
-        Block Iron1 = b.getLocation().add(1, 0, 0).getBlock();
-        Block Iron2 = b.getLocation().add(-1, 0, 0).getBlock();
-        Block Iron3 = b.getLocation().add(0, 0, 1).getBlock();
-        Block Iron4 = b.getLocation().add(0, 0, -1).getBlock();
+        Furnace f = (Furnace) b.getState();
+        Directional Furnaced = (Directional) f.getBlockData();
+        BlockFace targetFace = Furnaced.getFacing();
+        Location front = f.getBlock().getRelative(targetFace).getLocation();
+        ArrayList<Block> pbrs = new ArrayList<Block>();
+        Block Pbr1 = b.getLocation().add(1, 0, 0).getBlock();
+        Block Pbr2 = b.getLocation().add(-1, 0, 0).getBlock();
+        Block Pbr3 = b.getLocation().add(0, 0, 1).getBlock();
+        Block Pbr4 = b.getLocation().add(0, 0, -1).getBlock();
         Block Anvil = b.getLocation().add(0, 1, 0).getBlock();
-        Block Chest = b.getLocation().add(0, 2, 0).getBlock();
+        Block Chest = front.add(0, -1, 0).getBlock();
+        Block Hoppa = b.getLocation().add(0,-1,0).getBlock();
+        
         int check = 0;
 
-        irons.add(Iron1);
-        irons.add(Iron2);
-        irons.add(Iron3);
-        irons.add(Iron4);
-        int ironsnum = 0;
-        for (int i = 0; i < irons.size(); i++) {
-            if (irons.get(i).getType().equals(Material.IRON_BARS)) {
-                ironsnum += 1;
+        pbrs.add(Pbr1);
+        pbrs.add(Pbr2);
+        pbrs.add(Pbr3);
+        pbrs.add(Pbr4);
+        int num = 0;
+        for (int i = 0; i < pbrs.size(); i++) {
+            if (pbrs.get(i).getType().equals(Material.POLISHED_BLACKSTONE_BRICK_WALL)) {
+                num += 1;
             }
         }
-        if (Chest.getType().equals(Material.CHEST) && Anvil.getType().equals(Material.HOPPER) && ironsnum >= 3) {
+        if (Chest.getType().equals(Material.CHEST) && Anvil.getType().equals(Material.HOPPER) && Hoppa.getType().equals(Material.HOPPER) && num >= 2) {
             return true;
         }
         //p.sendMessage(Chest.toString() + Anvil.toString());
@@ -259,6 +275,7 @@ public class OilrigListener implements Listener {
         Vector vector = new Vector(0, -1, 0);
         BlockIterator iter = new BlockIterator(loc.getWorld(), loc.toVector(), vector, 0, 100);
         Block lastBlock = iter.next();
+        iter.next();
         while (iter.hasNext()) {
             lastBlock = iter.next();
             if (lastBlock.getType() == Material.COBBLESTONE_WALL) {
@@ -273,7 +290,9 @@ public class OilrigListener implements Listener {
             }
             break;
         }
+        //Bukkit.broadcastMessage("This has" + amt + "pipes");
         return amt;
+        
     }
 
 }

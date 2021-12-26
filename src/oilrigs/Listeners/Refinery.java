@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Furnace;
+import org.bukkit.block.data.Directional;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,6 +20,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
 
 /**
  *
@@ -117,7 +119,8 @@ public class Refinery implements Listener {
 
     public boolean checkRefinery(Location loc) {
         Furnace f = (Furnace) loc.getBlock().getState();
-        BlockFace targetFace = ((org.bukkit.material.Furnace) f.getBlock().getState().getData()).getFacing();
+        Directional FurnaceD = (Directional) f.getBlockData();
+        BlockFace targetFace = FurnaceD.getFacing();
         Location front = f.getBlock().getRelative(targetFace).getLocation();
         int yaw = 0;
         switch (targetFace) {
